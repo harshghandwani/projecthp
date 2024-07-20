@@ -1,0 +1,179 @@
+/* General Body Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('background.png'); /* Path to your background image */
+    background-size: cover; /* Ensure the image covers the entire background */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    background-attachment: fixed; /* Ensure the background image stays fixed during scrolling */
+    background-position: center; /* Center the background image */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Container Styling */
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    width: 400px;
+    text-align: center;
+    position: relative; /* For positioning the bouquets absolutely */
+}
+
+/* Heading Styles */
+h1 {
+    font-size: 2em;
+    color: #333;
+}
+
+/* Paragraph Styles */
+p {
+    font-size: 1.1em;
+    color: #555;
+}
+
+/* Label Styling */
+label {
+    display: block;
+    margin: 15px 0 5px;
+    font-size: 1em;
+    color: #333;
+}
+
+/* Input Styling */
+input[type="number"],
+input[type="text"] {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+/* Task Inputs Styling */
+#taskInputs label {
+    display: inline-block;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+#taskInputs input {
+    width: calc(50% - 22px);
+    margin-bottom: 10px;
+}
+
+/* Button Styling */
+button {
+    padding: 8px 16px;
+    background-color: #8f54cd;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #660df6;
+}
+
+/* Number Input Styling */
+input[type="number"] {
+    width: 50px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+/* Task Item Styling */
+.task-item {
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 4px;
+}
+
+/* Results Container */
+.results {
+    margin-top: 20px;
+}
+
+/* Task Result Styling */
+.task-result {
+    background-color: #e0f7fa;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-left: 5px solid #00796b;
+    border-radius: 4px;
+}
+
+.task-result strong {
+    color: #00796b;
+}
+
+/* Overall Efficiency Styling */
+.overall-efficiency {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #ffe0b2;
+    border-left: 5px solid #e65100;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.overall-efficiency strong {
+    color: green;
+}
+
+/* Congratulatory Animation */
+.congrats-message {
+    color: green;
+    font-size: 1.5em;
+    margin-top: 20px;
+    display: none; /* Initially hidden */
+}
+
+.congrats-message.show {
+    display: block; /* Show when condition is met */
+}
+
+.congrats-animation {
+    animation: sidewise 2s ease-in-out infinite;
+}
+
+@keyframes sidewise {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(10px); }
+    100% { transform: translateX(0); }
+}
+
+/* Flower Bouquets */
+
+.bouquet-animation-left {
+    display: block;
+    animation: slideInLeft 2s ease-in-out forwards;
+}
+
+.bouquet-animation-right {
+    display: block;
+    animation: slideInRight 2s ease-in-out forwards;
+}
+
+@keyframes slideInLeft {
+    from { left: -120px; opacity: 0; }
+    to { left: 0; opacity: 1; }
+}
+
+@keyframes slideInRight {
+    from { right: -120px; opacity: 0; }
+    to { right: 0; opacity: 1; }
+}

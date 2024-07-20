@@ -3,9 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>"hello</h1>
+    <div class="container">
+        <h1>Task Manager</h1>
+        <h4>For DSA add number of question**</h4>
+        <label for="taskCountInput">Enter number of tasks for today:</label>
+        <input type="number" id="taskCountInput" min="0">
+        <button onclick="startAddingTasks()">Add Tasks</button>
+
+        <div id="taskInputs">
+            <!-- Dynamic task input fields will be added here -->
+        </div>
+
+        <button onclick="saveTasks()">Save Tasks</button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>

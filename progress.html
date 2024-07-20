@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Progress Page</h1>
+        <div id="taskList">
+            <!-- Tasks will be displayed here with input fields for time -->
+        </div>
+        <button onclick="saveProgress()">Save Progress</button>
+    </div>
+
+    <script>
+        // Retrieve tasks from localStorage
+        var tasks = JSON.parse(localStorage.getItem('tasks'));
+
+        var taskListContainer = document.getElementById("taskList");
+
+        tasks.forEach(function(task, index) {
+            var taskItem = document.createElement("div");
+            taskItem.className = "task-item";
+            taskItem.innerHTML = "<strong>Task " + (index + 1) + ":</strong> " + task.description;
+            
+            var timeInput = document.createElement("input");
+            timeInput.type = "number";
+            timeInput.min = "0";
+            timeInput.value = task.actualTime || ""; // Pre-fill with existing time if available
+            timeInput.setAttribute("data-task-index", index); // Store index for reference
+            taskItem.appendChild(timeInput);
+
+            taskListContainer.appendChild(taskItem);
+        });
+
+        // Function to save progress
+        function saveProgress() {
+            tasks = tasks.map(function(task, index) {
+                var timeInput = document.querySelector("[data-task-index='" + index + "']");
+                var timeValue = parseInt(timeInput.value.trim(), 10);
+                return {
+                    description: task.description,
+                    expectedTime: task.time, // Save the expected time from the original task
+                    actualTime: timeValue || 0 // Default to 0 if input is empty or NaN
+                };
+            });
+
+            // Update tasks in localStorage
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+
+            // Redirect to result.html after saving progress
+            window.location.href = "result.html";
+        }
+    </script>
+</body>
+</html>

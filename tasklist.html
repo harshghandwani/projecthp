@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task List</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Task List for Today</h1>
+        <div id="message"></div>
+        <div id="taskList">
+            <!-- Tasks will be displayed here -->
+        </div>
+        <button onclick="update()" id="update_progress">Update the progress!!!</button>
+    </div>
+    <script>
+        // Retrieve tasks from localStorage
+        var tasks = JSON.parse(localStorage.getItem('tasks'));
+
+        var taskListContainer = document.getElementById("taskList");
+
+        tasks.forEach(function(task, index) {
+            var taskItem = document.createElement("div");
+            taskItem.className = "task-item";
+            taskItem.innerHTML = "<strong>Task " + (index + 1) + ":</strong> " + task.description + " (Time: " + task.time + " minutes)";
+            taskListContainer.appendChild(taskItem);
+        });
+
+        function update(){
+            window.location.href = "progress.html";
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+
+        // Check for the query parameter and display message
+        var urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('saved') === 'true') {
+            var messageDiv = document.getElementById('message');
+            messageDiv.textContent = "All the best!";
+            messageDiv.style.color = "green";
+            messageDiv.style.fontSize = "1.2em";
+            messageDiv.style.marginBottom = "20px";
+        }
+    </script>
+</body>
+</html>

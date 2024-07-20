@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Results</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Task Results</h1>
+        <div id="taskResults" class="results">
+            <!-- Task results will be displayed here -->
+        </div>
+        <div id="overallEfficiency" class="overall-efficiency">
+            <!-- Overall efficiency will be displayed here -->
+        </div>
+        <div id="congratsMessage" class="congrats-message">
+            <!-- Congratulatory message will be displayed here if applicable -->
+        </div>
+        <button class="primary" onclick="goToHomePage()">Home</button>
+        
+    </div>
+
+    <script>
+    // Retrieve tasks from localStorage
+    var tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+    var taskResultsContainer = document.getElementById("taskResults");
+    var overallEfficiencyContainer = document.getElementById("overallEfficiency");
+    var congratsMessageContainer = document.getElementById("congratsMessage");
+
+    var totalEfficiency = 0;
+
+    tasks.forEach(function(task, index) {
+        var taskResultItem = document.createElement("div");
+        taskResultItem.className = "task-result";
+        
+        var actualTime = task.actualTime || 0; // Actual time spent (default to 0 if not set)
+        var expectedTime = task.expectedTime || 0; // Expected time (retrieve from tasks array)
+        
+        var efficiency = (expectedTime > 0) ? (actualTime / expectedTime * 100).toFixed(2) : 0; // Calculate efficiency
+        totalEfficiency += parseFloat(efficiency); // Sum up efficiencies
+        
+        var resultMessage = `<strong>Task ${index + 1}:</strong> 
+                            Actual Time: ${actualTime} minutes, 
+                            Expected Time: ${expectedTime} minutes, 
+                            Efficiency: ${efficiency}%`;
+
+        taskResultItem.innerHTML = resultMessage;
+        taskResultsContainer.appendChild(taskResultItem);
+    });
+
+    var overallEfficiency = (tasks.length > 0) ? (totalEfficiency / tasks.length).toFixed(2) : 0; // Calculate overall efficiency
+    var overallEfficiencyMessage = `Overall Efficiency: <strong>${overallEfficiency}%</strong>`;
+    overallEfficiencyContainer.innerHTML = overallEfficiencyMessage;
+
+    if (overallEfficiency > 70) {
+        congratsMessageContainer.classList.add("congrats-animation");
+        congratsMessageContainer.textContent = "Congratulations!";
+        congratsMessageContainer.style.display = "block"; // Show the congrats message
+
+        // Trigger flower bouquet animations
+        leftBouquet.classList.add("bouquet-animation-left");
+        rightBouquet.classList.add("bouquet-animation-right");
+    }
+
+    function goToHomePage() {
+        window.location.href = "index.html";
+    }
+</script>
+
+</body>
+</html>
